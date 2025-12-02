@@ -2,7 +2,7 @@
 @plugin "daisyui";
 
 @plugin "daisyui/theme" {
-  name: "MTC Light";
+  name: "MTCLight";
   default: true;
   prefersdark: false;
   color-scheme: "light";
