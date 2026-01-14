@@ -1,7 +1,5 @@
 <template>
-    <div>
-        {{ timetable.title }}
-
+    
         <div class="flex flex-col md:flex-row">
             <div v-for="(classes, day) in classes">
                 <div v-if="classes.length > 0">
@@ -27,14 +25,15 @@
                 </div>
             </div>
         </div>
-        <p><span class="badge badge-xs badge-primary">T</span> Trial members may attend these classes.</p>
-    </div>
+        <p v-if="hasTrialClasses" class="mt-5 text-center"><span class="badge badge-xs badge-primary">T</span> Trial members welcome to attend these classes.</p>
+        
 </template>
 
 <script setup lang="ts">
 
 
 const classes = ref({});
+const hasTrialClasses = ref(false);
 
 const props = defineProps({
     timetable: {
@@ -57,6 +56,8 @@ function buildClasses() {
 
 onMounted(() => {
     buildClasses();
+
+    hasTrialClasses.value = props.timetable.classes.some(c => c.allowTrial);
 });
 
 
